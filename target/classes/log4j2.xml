@@ -5,10 +5,26 @@
         <Console name="console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
+
+        <RollingRandomAccessFile name="web_access" fileName="${sys:log_path}/web-access.log"
+                                 filePattern="${sys:log_path}/web-access-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <Pattern>%d %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+        </RollingRandomAccessFile>
     </Appenders>
+
+
     <Loggers>
-        <Root level="debug">
+        <Root level="error">
             <AppenderRef ref="console"/>
         </Root>
+
+        <Logger name="com.hwl.maven.web.log.InfoLog" level="info" additivity="false">
+            <AppenderRef ref="web_access"/>
+        </Logger>
     </Loggers>
 </Configuration>

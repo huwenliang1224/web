@@ -15,13 +15,20 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 
+import java.util.UUID;
+
 /**
  * Created by huwenl on 2017/4/28.
  */
 public class Application {
+
+    public static String flg = null;
+
     public static void main(String[] args) {
         try {
+            flg = UUID.randomUUID().toString();
             StartUpManager.initStartupParam();
+            StartUpManager.initSqlManager();
             startapp();
         } catch (Exception e) {
             e.printStackTrace();

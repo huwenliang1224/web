@@ -32,10 +32,16 @@ public class StartUpManager {
         }
 
         try {
+            System.setProperty("Log4jContextSelector","org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
+            System.setProperty("log_path", "/mnt/logs");
             StartUpParam.port = Integer.parseInt(properties.getProperty("port"));
             System.out.println("port:" + StartUpParam.port);
         } catch (NumberFormatException e2) {
             throw e2;
         }
+    }
+
+    public static void initSqlManager() throws Exception {
+        MysqlManager.initData();
     }
 }
